@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A Voz da Juventude IBF</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --turquesa: #3AACB8;
+    --turquesa-e: #2A8A94;
+    --turquesa-c: #E8F7F9;
+    --navy: #1C2B3A;
+    --amarelo: #F5C842;
+    --off-white: #F5F0E8;
+    --cinza: #6B7280;
+    --branco: #FFFFFF;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--navy);
+    color: var(--off-white);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 60px 24px 80px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 20% 30%, rgba(58,172,184,0.15) 0%, transparent 55%),
+      radial-gradient(ellipse at 80% 70%, rgba(245,200,66,0.06) 0%, transparent 50%);
+    pointer-events: none;
+  }
+
+  /* Peixinhos flutuando no fundo */
+  .fish-bg {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+  }
+
+  .fish-bg span {
+    position: absolute;
+    font-size: 1.4rem;
+    opacity: 0.04;
+    animation: floatFish linear infinite;
+  }
+
+  @keyframes floatFish {
+    from { transform: translateX(-60px) translateY(0); opacity: 0; }
+    10%  { opacity: 0.04; }
+    90%  { opacity: 0.04; }
+    to   { transform: translateX(calc(100vw + 60px)) translateY(var(--dy)); opacity: 0; }
+  }
+
+  .hero-logo {
+    position: relative;
+    margin-bottom: 32px;
+    animation: fadeDown 0.7s ease both;
+  }
+
+  .logo-svg {
+    width: 80px;
+    height: 36px;
+    display: block;
+    margin: 0 auto;
+  }
+
+  .hero-eyebrow {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--turquesa);
+    margin-bottom: 20px;
+    animation: fadeDown 0.8s ease 0.1s both;
+    position: relative;
+  }
+
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.8rem, 9vw, 6rem);
+    font-weight: 900;
+    color: var(--off-white);
+    line-height: 1.0;
+    letter-spacing: -2px;
+    margin-bottom: 8px;
+    position: relative;
+    animation: fadeDown 0.85s ease 0.15s both;
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: var(--turquesa);
+  }
+
+  .hero-sub {
+    font-size: clamp(1rem, 2.5vw, 1.25rem);
+    color: rgba(245,240,232,0.55);
+    margin-top: 24px;
+    max-width: 500px;
+    line-height: 1.7;
+    animation: fadeUp 0.9s ease 0.3s both;
+    position: relative;
+  }
+
+  .hero-pergunta {
+    margin-top: 48px;
+    background: rgba(58,172,184,0.1);
+    border: 1px solid rgba(58,172,184,0.25);
+    border-radius: 20px;
+    padding: 32px 36px;
+    max-width: 600px;
+    text-align: left;
+    animation: fadeUp 1s ease 0.45s both;
+    position: relative;
+  }
+
+  .hero-pergunta .pergunta-label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--turquesa);
+    margin-bottom: 14px;
+  }
+
+  .hero-pergunta p {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15rem;
+    font-style: italic;
+    color: var(--off-white);
+    line-height: 1.7;
+  }
+
+  .hero-cta {
+    margin-top: 40px;
+    animation: fadeUp 1s ease 0.6s both;
+    position: relative;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    background: var(--turquesa);
+    color: var(--navy);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    padding: 18px 40px;
+    border-radius: 100px;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    letter-spacing: 0.3px;
+  }
+
+  .btn-primary:hover {
+    background: var(--amarelo);
+    transform: translateY(-2px);
+    box-shadow: 0 12px 32px rgba(58,172,184,0.3);
+  }
+
+  .btn-arrow {
+    font-size: 1.1rem;
+    transition: transform 0.3s ease;
+  }
+
+  .btn-primary:hover .btn-arrow { transform: translateX(4px); }
+
+  .scroll-hint {
+    position: absolute;
+    bottom: 32px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    animation: fadeUp 1s ease 1s both;
+  }
+
+  .scroll-hint span {
+    font-size: 0.65rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(245,240,232,0.3);
+  }
+
+  .scroll-line {
+    width: 1px;
+    height: 40px;
+    background: linear-gradient(to bottom, rgba(58,172,184,0.5), transparent);
+    animation: scrollPulse 2s ease infinite;
+  }
+
+  @keyframes scrollPulse {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 1; }
+  }
+
+  /* ── FORMULÁRIO ── */
+  .form-section {
+    background: var(--off-white);
+    padding: 100px 24px;
+    position: relative;
+  }
+
+  .form-section::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 80px;
+    background: var(--navy);
+    clip-path: ellipse(60% 100% at 50% 0%);
+  }
+
+  .form-container {
+    max-width: 720px;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  .form-header {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+
+  .form-eyebrow {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--turquesa-e);
+    margin-bottom: 16px;
+  }
+
+  .form-header h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 700;
+    color: var(--navy);
+    line-height: 1.1;
+    margin-bottom: 16px;
+  }
+
+  .form-header p {
+    font-size: 1rem;
+    color: var(--cinza);
+    line-height: 1.7;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+
+  /* Google Form embed */
+  .google-form-wrapper {
+    background: var(--branco);
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 4px 40px rgba(28,43,58,0.08);
+    border: 1px solid rgba(28,43,58,0.06);
+  }
+
+  .google-form-wrapper iframe {
+    width: 100%;
+    min-height: 600px;
+    border: none;
+    display: block;
+  }
+
+  /* ── COMO FUNCIONA ── */
+  .como-section {
+    background: var(--navy);
+    padding: 100px 24px;
+  }
+
+  .como-container {
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .como-container .section-eyebrow {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--turquesa);
+    margin-bottom: 16px;
+  }
+
+  .como-container h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    font-weight: 700;
+    color: var(--off-white);
+    margin-bottom: 60px;
+    line-height: 1.2;
+  }
+
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+  }
+
+  .step {
+    text-align: center;
+    padding: 32px 24px;
+    background: rgba(255,255,255,0.04);
+    border-radius: 20px;
+    border: 1px solid rgba(58,172,184,0.12);
+    transition: all 0.3s ease;
+  }
+
+  .step:hover {
+    background: rgba(58,172,184,0.08);
+    border-color: rgba(58,172,184,0.3);
+    transform: translateY(-4px);
+  }
+
+  .step-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem;
+    font-weight: 900;
+    color: rgba(58,172,184,0.2);
+    line-height: 1;
+    margin-bottom: 16px;
+  }
+
+  .step-icon { font-size: 2rem; margin-bottom: 12px; }
+
+  .step h3 {
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--off-white);
+    margin-bottom: 10px;
+  }
+
+  .step p {
+    font-size: 0.88rem;
+    color: rgba(245,240,232,0.55);
+    line-height: 1.65;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: #111B25;
+    padding: 40px 24px;
+    text-align: center;
+  }
+
+  footer .logo-footer {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    font-weight: 900;
+    color: var(--turquesa);
+    margin-bottom: 8px;
+  }
+
+  footer p {
+    font-size: 0.82rem;
+    color: rgba(245,240,232,0.3);
+    line-height: 1.8;
+  }
+
+  footer strong { color: rgba(245,240,232,0.5); }
+
+  /* ── ANIMAÇÕES ── */
+  @keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── RESPONSIVO ── */
+  @media (max-width: 768px) {
+    .hero-pergunta { padding: 24px; }
+    .steps { grid-template-columns: 1fr; }
+    .form-section { padding: 80px 20px; }
+    .como-section { padding: 80px 20px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Peixinhos flutuando -->
+<div class="fish-bg" aria-hidden="true"></div>
+
+<!-- ── HERO ── -->
+<section class="hero">
+  <div class="hero-logo">
+    <svg class="logo-svg" viewBox="0 0 90 40" xmlns="http://www.w3.org/2000/svg" fill="none" aria-label="Logo Juventude IBF">
+      <!-- Trapézio invertido com cantos arredondados -->
+      <path d="M6 4 Q2 4 4 8 L38 36 Q42 40 45 40 Q48 40 52 36 L86 8 Q88 4 84 4 Z" fill="#3AACB8"/>
+    </svg>
+  </div>
+
+  <p class="hero-eyebrow">Juventude IBF · Igreja Batista da Freguesia da Ilha</p>
+
+  <h1>A <em>Voz</em> da<br>Juventude</h1>
+
+  <p class="hero-sub">
+    Queremos ouvir o que Deus tem colocado no seu coração. A sua resposta vai ajudar a construir o tema do nosso Mês da Juventude.
+  </p>
+
+  <div class="hero-pergunta">
+    <p class="pergunta-label">A pergunta</p>
+    <p>
+      "Como é a igreja com a qual você sonha para o futuro? Como você imagina a igreja para os seus filhos, netos e para a sua própria velhice?"
+    </p>
+  </div>
+
+  <div class="hero-cta">
+    <a href="#responder" class="btn-primary">
+      Quero responder
+      <span class="btn-arrow">→</span>
+    </a>
+  </div>
+
+  <div class="scroll-hint">
+    <span>Role para baixo</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- ── FORMULÁRIO ── -->
+<section class="form-section" id="responder">
+  <div class="form-container">
+    <div class="form-header">
+      <p class="form-eyebrow">Sua voz importa</p>
+      <h2>Compartilhe o seu sonho</h2>
+      <p>Não existe resposta certa ou errada. Escreva com liberdade o que está no seu coração.</p>
+    </div>
+
+    <div class="google-form-wrapper">
+      <iframe
+        src="https://docs.google.com/forms/d/e/1FAIpQLSdT6wo9WOHLP_-In9cKaES7vP3ogyJkA01Q8lDPKERF6GF4Qw/viewform?embedded=true"
+        title="A Voz da Juventude IBF"
+        loading="lazy">
+        Carregando formulário…
+      </iframe>
+    </div>
+  </div>
+</section>
+
+<!-- ── COMO FUNCIONA ── -->
+<section class="como-section">
+  <div class="como-container">
+    <p class="section-eyebrow">O que acontece depois</p>
+    <h2>Como suas respostas<br>vão ganhar vida</h2>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">01</div>
+        <div class="step-icon">✍️</div>
+        <h3>Você responde</h3>
+        <p>Compartilha o sonho que Deus colocou no seu coração sobre a igreja do futuro.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">02</div>
+        <div class="step-icon">☁️</div>
+        <h3>Nuvem de palavras</h3>
+        <p>As respostas de todos os jovens formarão uma nuvem de palavras — revelando o que mais pulsa no coração da juventude.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">03</div>
+        <div class="step-icon">🎯</div>
+        <h3>O tema nasce</h3>
+        <p>A palavra ou expressão mais presente se tornará o tema oficial do Mês da Juventude 2026.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="logo-footer">Juventude IBF</div>
+  <p>
+    <strong>Igreja Batista da Freguesia da Ilha</strong><br>
+    Rua Magno Martins, 165 · Freguesia da Ilha do Governador<br>
+    @juventudefreguesiadailha · www.batistafreguesia.com.br
+  </p>
+</footer>
+
+<script>
+  // Peixinhos flutuando
+  // Cardume nadando CONTRA a maré — direções opostas, ondulação, alta visibilidade
+  const fishBg = document.querySelector('.fish-bg');
+
+  // Peixe nadando para a DIREITA (sentido normal)
+  const fishRight = `<svg viewBox="0 0 64 38" xmlns="http://www.w3.org/2000/svg" fill="none">
+    <path d="M10 19 Q26 5 46 19 Q26 33 10 19Z" fill="#3AACB8"/>
+    <path d="M46 19 L62 10 L62 28Z" fill="#3AACB8"/>
+    <circle cx="20" cy="15" r="3" fill="#1C2B3A"/>
+  </svg>`;
+
+  // Peixe nadando para a ESQUERDA (contra a maré — espelhado)
+  const fishLeft = `<svg viewBox="0 0 64 38" xmlns="http://www.w3.org/2000/svg" fill="none">
+    <path d="M54 19 Q38 5 18 19 Q38 33 54 19Z" fill="#3AACB8" opacity="0.7"/>
+    <path d="M18 19 L2 10 L2 28Z" fill="#3AACB8" opacity="0.7"/>
+    <circle cx="44" cy="15" r="3" fill="#1C2B3A"/>
+  </svg>`;
+
+  // Todos os peixes nadando para a direita — cardume unido
+  for (let i = 0; i < 20; i++) {
+    const wrapper = document.createElement('div');
+    wrapper.innerHTML = fishRight;
+    const fishEl = wrapper.firstChild;
+
+    const top = 4 + Math.random() * 88;
+    const size = 34 + Math.random() * 34;
+    const duration = 16 + Math.random() * 16;
+    const delay = Math.random() * duration;
+    const wobble = (Math.random() - 0.5) * 50;
+    const opacity = 0.22 + Math.random() * 0.14;
+
+    const animName = `swim_r_${i}`;
+    const styleEl = document.createElement('style');
+    styleEl.textContent = `
+      @keyframes ${animName} {
+        0%   { transform: translate(-80px, 0px); opacity: 0; }
+        8%   { opacity: ${opacity}; }
+        92%  { opacity: ${opacity}; }
+        100% { transform: translate(110vw, ${wobble}px); opacity: 0; }
+      }
+    `;
+    document.head.appendChild(styleEl);
+
+    fishEl.style.cssText = `
+      position: absolute;
+      top: ${top}%;
+      left: 0;
+      width: ${size}px;
+      animation: ${animName} ${duration}s linear -${delay}s infinite;
+      filter: drop-shadow(0 0 4px rgba(58,172,184,0.35));
+    `;
+    fishBg.appendChild(fishEl);
+  }
+
+  // Scroll suave para o formulário
+  document.querySelector('.btn-primary').addEventListener('click', e => {
+    e.preventDefault();
+    document.getElementById('responder').scrollIntoView({ behavior: 'smooth' });
+  });
+
+  // Ajusta altura do iframe dinamicamente
+  window.addEventListener('message', e => {
+    if (e.data && e.data.type === 'resize') {
+      const iframe = document.querySelector('iframe');
+      if (iframe) iframe.style.height = e.data.height + 'px';
+    }
+  });
+</script>
+
+</body>
+</html>
